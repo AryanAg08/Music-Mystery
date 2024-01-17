@@ -23,7 +23,7 @@
     "express-session": "^1.17.3",
     "mongoose": "^8.0.4",
     "open": "^10.0.3",
-    "passport": "^0.5.3",
+    "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
     "play-sound": "^1.1.6"
   }
