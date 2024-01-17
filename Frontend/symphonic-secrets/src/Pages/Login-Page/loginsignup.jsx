@@ -5,7 +5,7 @@ import userIcon from './person.png';
 import email_icon from './email.png'
 import password_icon from './password.png';
 
-export async function LoginPage() { 
+export  function LoginPage() { 
 
     const[action,setAction]= useState("Sign Up");
 
@@ -15,6 +15,16 @@ export async function LoginPage() {
   }
   const [userDetails, setUserDetails] = useState(UserDetails);
 
+  const onFormUpdate = (category, value) => {
+    setUserDetails({
+        ...userDetails,
+        [category]: value
+    })
+}
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(userDetails);
   let response = await fetch("http://localhost:5001/login", {
     method: "POST",
     headers: {
@@ -23,6 +33,8 @@ export async function LoginPage() {
     body: JSON.stringify(userDetails),
 });
     
+    
+  }
 
     return (
       <div className='Loginnnn'>
@@ -38,11 +50,11 @@ export async function LoginPage() {
             </div>}
             <div className="input">
                 <img src={email_icon} alt=""/>
-                <input type="email"  value={userDetails.email} placeholder="Email Id"/>
+                <input type="email" value={userDetails.email} placeholder="Email Id" onChange={(e) => onFormUpdate('email', e.target.value)}/>
             </div>
             <div className="input">
                 <img src={password_icon} alt=""/>
-                <input type="password" value={userDetails.password} placeholder="password" />
+                <input type="password" value={userDetails.password} placeholder="password" onChange={(e) => onFormUpdate('password', e.target.value)}/>
             </div>
           </div> 
           {action==="Sign Up"?<div></div>:<div className="forgot-password">Lost Password?<span>Click here!</span></div>}
@@ -52,8 +64,8 @@ export async function LoginPage() {
             <div className={action==="Sign Up"?"submit gray":"submit"} onClick={()=>{setAction("Login")}}>Login</div>
             </div>  
             <div className='submit-container'>
-              <a> <button className='google'>Submit</button></a>
-             <a href='http://localhost:5001/google'><button className='google'>Login with Google</button></a>
+              <a href='http://localhost:5001/redirect'> <button className='google' onClick={(e) => handleSubmit(e)}>  Submit </button></a>
+             <a href='http://localhost:5001/google'><button  className='google'>Login with Google</button></a>
             </div>
         </div>
         </div>

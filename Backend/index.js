@@ -1,3 +1,5 @@
+// require = require('esm')(module /*, options*/);
+
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
@@ -10,7 +12,8 @@ const cookiesession = require("cookie-session");
 const SongApi = require("./Routes/Songs");
 const axios = require('axios');
 const bodyParser = require('body-parser');
-
+// const open = require("open");
+const player  = require("play-sound")(opts = {});
 const app = express();
 
 
@@ -66,8 +69,8 @@ async function getAccessToken() {
   return authResponse.data.access_token;
 }
 
-app.post('/search', async (req, res) => {
-  const { songName } = req.body;
+app.get('/search', async (req, res) => {
+//   const { songName } = req.body;
   
   try {
     const accessToken = await getAccessToken();
@@ -77,18 +80,26 @@ app.post('/search', async (req, res) => {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {
-        q: songName,
+        q: "shape of you",
         type: 'track',
       },
     });
 
-    const tracks = searchResponse.data.tracks.items;
+    const tracks = searchResponse.data.tracks.items[0];
+ 
+    const song = tracks
 
-    res.json({ tracks });
+    //res.json({ message: 'Song Playback initiated!' });
+    if (song && song.preview_url) {
+         console.log(song.preview_url);
+         res.redirect(song.preview_url)
+    }
+
   } catch (error) {
     console.error('Error:', error.response ? error.response.data : error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 app.listen(PORT, () => console.log(`Listening to the port ${PORT}`));

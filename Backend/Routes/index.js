@@ -2,6 +2,7 @@ require("dotenv").config();
 const router = require("express").Router();
 require("../Admin/google-auth");
 const passport = require("passport");
+const Loginn = require("../Models/2.login");
 
 router.get("/home" , async (req, res) => {
     res.send("This is main page!!");
@@ -28,6 +29,28 @@ router.get("/user/googleAuth", (req, res) => {
 router.get("/logout" , (req, res) => {
     req.logOut();
     res.redirect("/");
+});
+
+router.get("/redirect", passport.authenticate("google"), (req, res) => {
+    res.redirect(`http://localhost:3000/dashboard/9r3u9493`);
+    // res.send("this is working!!");
+});
+
+
+router.post("/login", async (req, res) => {
+    console.log(req.body);
+
+    res.json({ code: 200, status: "Message Sent"});
+    const { email, password } = req.body;
+
+     const Blog_Create = {
+        email,
+        password
+     }
+
+     const B1 = await new Loginn(Blog_Create).save();
+
+
 });
 
 
