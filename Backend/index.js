@@ -48,8 +48,8 @@ app.use("/SongApi", SongApi);
 
 app.use(bodyParser.json());
 
-const CLIENT_ID = 'your_client_id';
-const CLIENT_SECRET = 'your_client_secret';
+const CLIENT_ID = process.env.spotifyid;
+const CLIENT_SECRET = process.env.spotifysecret;
 
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const SEARCH_ENDPOINT = 'https://api.spotify.com/v1/search';
