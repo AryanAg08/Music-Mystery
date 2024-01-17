@@ -11,8 +11,8 @@ router.get("/home" , async (req, res) => {
 router.get("/google", passport.authenticate("google"));
 
 router.get("/google/callback", passport.authenticate("google"), (req, res) => {
-    // res.redirect(`http://localhost:3000/dashboard/${req.user.id}`);
-    res.send("this is working!!");
+    res.redirect(`http://localhost:3000/dashboard/${req.user.id}`);
+    // res.send("this is working!!");
 });
 
 router.get("/user/googleAuth", (req, res) => {
