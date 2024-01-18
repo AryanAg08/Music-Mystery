@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+.containerRR{
+    width: 100vw;
+    min-height: 100vh;
+    background: #ced8ff;
+    transition: 0.5s;
+}
+.container.dark{
+    background: #222;
+}
+.gamegrid{
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 15px;
+    row-gap: 30px; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin:5% 3%;
+}
+/* .gridflex{
+    display: flex;
+    justify-content: space-evenly;
+} */
+.title{
+    text-align: center;
+    margin-top:2%;
+    color: purple;
+    font-family: poppins;
+}
+.des{
+    text-align: center;
+    margin-top:2%;
+    color: purple;
+    font-family: poppins;
+}
+/* @media (max-width: 750px){
+    .gamegrid{
+        grid-template-columns: 1fr ;
+    }
+} */
+
+.whole{
+    height:300px;
+    width:300px;
+    margin:0 2%;
+}
+
+.whole img{
+    width:100%;
+}
+/* @media (min-width: 751px) and (max-width: 999px) {
+    .gamegrid{
+        grid-template-columns: 1fr 1fr ;
+    }
+}
+@media (min-width: 1000px) {
+    .gamegrid{
+        grid-template-columns: 1fr 1fr ;
+    }
+} */
